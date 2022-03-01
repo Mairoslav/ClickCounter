@@ -29,13 +29,11 @@ class ViewController: UIViewController {
         // set our label property. Taking the object reference stored in a local variable viewDidLoad (white one) and giving that value a more permanent home in our property (green one). It is this connection that will enable our viewController to set the label's text when the button is clicked.
         self.label = label
         
-        let button = UIButton()
-        button.frame = CGRect(x: 150, y: 250, width: 60, height: 60)
-        // .setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
+        // let button = UIButton()
+        // button.frame = CGRect(x: 150, y: 250, width: 60, height: 60)
+        let button: UIButton = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
+        button.backgroundColor = UIColor.blue
         button.setTitle("Click", for: .normal)
-        // setTitleColor(<#T##color: UIColor?##UIColor?#>, for: <#T##UIControl.State#>)
-        button.setTitleColor(UIColor.blue, for: .normal)
-        self.view.addSubview(button)
         
         // Here in the viewDidLoad we are going to add target action to our button. And here you can see the three components of thhe target action:
         
@@ -43,18 +41,28 @@ class ViewController: UIViewController {
             // (2) the method to use, which is incrementCount
             // (3) control event which is touch-up inside
         
-        // addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        // also tried to write incrementCount(sender:) here instead of just incrementCount
         button.addTarget(self, action: #selector(incrementCount), for: .touchUpInside)
-       
+        // button.tag = 1
+        self.view.addSubview(button)
+        
+        
         // method that will be declared when the button is clicked. We use this self.label property to reach out of the ViewController object and modify the label. It gives us an Outlet to the label.
         
         @objc func incrementCount(sender: UIButton!) {
+            /*
+            let buttonSendTag: UIButton = sender
+            
+            if buttonSendTag.tag == 1 {
+                dismiss(animated: true, completion: nil)
+            */
+            
+            // instead of above first try below two lines
             self.count += 1 // icrement the count
             self.label.text = "\(self.count)" // set the label's text
         }
         
     }
-
-
 }
+
 
